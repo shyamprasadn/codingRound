@@ -1,4 +1,8 @@
 import com.sun.javafx.PlatformUtil;
+
+import codingRound.BaseLaunchTest;
+import codingRound.DriverAction;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -10,15 +14,15 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-public class FlightBookingTest {
+public class FlightBookingTest extends BaseLaunchTest {
 
-    WebDriver driver = new ChromeDriver();
+  //  WebDriver driver = new ChromeDriver();
 
 
     @Test
-    public void testThatResultsAppearForAOneWayJourney() {
+    public void testThatResultsAppearForAOneWayJourney()  {
 
-        setDriverPath();
+       // setDriverPath();  - moved to @BeforeSuite
         driver.get("https://www.cleartrip.com/");
         waitFor(2000);
         driver.findElement(By.id("OneWay")).click();
@@ -32,8 +36,8 @@ public class FlightBookingTest {
         List<WebElement> originOptions = driver.findElement(By.id("ui-id-1")).findElements(By.tagName("li"));
         originOptions.get(0).click();
 
-        driver.findElement(By.id("toTag")).clear();
-        driver.findElement(By.id("toTag")).sendKeys("Delhi");
+        driver.findElement(By.id("ToTag")).clear();
+        driver.findElement(By.id("ToTag")).sendKeys("Delhi");
 
         //wait for the auto complete options to appear for the destination
 
@@ -49,10 +53,10 @@ public class FlightBookingTest {
 
         waitFor(5000);
         //verify that result appears for the provided journey search
-        Assert.assertTrue(isElementPresent(By.className("searchSummary")));
+        Assert.assertTrue(DriverAction.isElementPresent(By.className("searchSummary")));
 
-        //close the browser
-        driver.quit();
+      /*  //close the browser
+        driver.quit();*/          // driver quit added to after suite method.
 
     }
 
@@ -66,16 +70,18 @@ public class FlightBookingTest {
     }
 
 
-    private boolean isElementPresent(By by) {
+    // Moving isElementPresent method to DriverAction class to make it resuable across the scripts.
+    
+    /*private boolean isElementPresent(By by) {
         try {
             driver.findElement(by);
             return true;
         } catch (NoSuchElementException e) {
             return false;
         }
-    }
+    }*/
 
-    private void setDriverPath() {
+   /* private void setDriverPath() {
         if (PlatformUtil.isMac()) {
             System.setProperty("webdriver.chrome.driver", "chromedriver");
         }
@@ -85,5 +91,5 @@ public class FlightBookingTest {
         if (PlatformUtil.isLinux()) {
             System.setProperty("webdriver.chrome.driver", "chromedriver_linux");
         }
-    }
+    }*/
 }
