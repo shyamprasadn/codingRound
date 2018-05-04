@@ -1,0 +1,36 @@
+CODE REIVEW Comments and Framework Suggestions:
+
+Flight Booking Test:
+ 1. PageObject Design pattern can be followed for this test
+ 2. Locator for 'ToTag' is incorrect. Corrected the same
+ 3. Locators can be stored in properties File or enum class.
+ 4. DriverAction class added to maintain reusable methods and wrappers around selenium methods. 
+ 5. Class - BaseLauncTest  added to facilitate configuration under beforeSuite and AfterSuite methods.
+ 6. Reusable methods like Origin and Destination selections and search functionalities
+ 	can be maintained in a seperate java class.
+ 7. Test data can be maintained in Excel.
+ 
+ Hotel Booking Test:
+ 1. Updated the Test with PageFactory Pattern
+ 2. Extended BaseLaunchTest class to launch browser and get the required driver
+ 3. Created a constructor to pass the driver and initiate the elements. 
+ 4. created a HotelBookingPage class to maintain elements and functional methods,
+ 	which inturn are called to Test method under the script.
+ 5. all page classes to handle locators,  constructors and methods can be maintained in packages module wise.
+ 6. Test data can be maintained in Excel.
+ 
+ SignIn Test:
+ 
+ 1. PageObject Design pattern can be used. Extended BaseLaunchTest same as of Flight booking test.
+ 2. Need to Switch to the frame to enter sign in credentials in the credential popup. 
+ 3. added the switchto functionality to DriverAction class and called in the script.(wrapper and resuable)
+ 4. used WebDriverWait to wait for the signIn button. Wait methods can also be maintained in a seperate
+ 	class to make them reusable. 
+ 
+ Frameworks:
+ -A full fledged Single Framework can be created to maintain both PageObject and PageFactory Pattern Designs. 
+ -Hybrid framework that can be used to drive with data or with key words as an when needed. 
+ 
+ 
+ 
+  
