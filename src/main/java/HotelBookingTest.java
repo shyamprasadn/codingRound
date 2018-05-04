@@ -1,44 +1,34 @@
 import com.sun.javafx.PlatformUtil;
+
+import codingRound.BaseLaunchTest;
+import codingRound.HotelBookingPage;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.Test;
 
-public class HotelBookingTest {
+public class HotelBookingTest extends BaseLaunchTest{
 
-    WebDriver driver = new ChromeDriver();
-
-    @FindBy(linkText = "Hotels")
-    private WebElement hotelLink;
-
-    @FindBy(id = "Tags")
-    private WebElement localityTextBox;
-
-    @FindBy(id = "SearchHotelsButton")
-    private WebElement searchButton;
-
-    @FindBy(id = "travellersOnhome")
-    private WebElement travellerSelection;
-
+	HotelBookingPage HBP;
+    
     @Test
     public void shouldBeAbleToSearchForHotels() {
-        setDriverPath();
-
-        driver.get("https://www.cleartrip.com/");
-        hotelLink.click();
-
-        localityTextBox.sendKeys("Indiranagar, Bangalore");
-
-        new Select(travellerSelection).selectByVisibleText("1 room, 2 adults");
-        searchButton.click();
-
-        driver.quit();
-
+       
+    	HBP = new HotelBookingPage(driver);
+    	HBP.openUrlandClickHotel();
+    	HBP.setPlaceandSelectRooms();
+    	
+        //driver.quit();  this is already covered under afterSuite in BaseLaunch
     }
 
-    private void setDriverPath() {
+    
+    //setDriverPath is already coverd in base launch Test
+    
+  /*  private void setDriverPath() {
         if (PlatformUtil.isMac()) {
             System.setProperty("webdriver.chrome.driver", "chromedriver");
         }
@@ -49,5 +39,5 @@ public class HotelBookingTest {
             System.setProperty("webdriver.chrome.driver", "chromedriver_linux");
         }
     }
-
+*/
 }
